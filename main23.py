@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+
 
 def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
     # Calculate amounts based on provided formulas
@@ -11,6 +11,7 @@ def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
     
     return final_amount
 
+
 def calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rent):
     # Calculate total revenue and total expenses
     total_revenue = sugarcane_quantity * sugarcane_price
@@ -21,6 +22,7 @@ def calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing
     profit_percentage = (profit / total_revenue) * 100 if total_revenue != 0 else 0
     
     return profit, profit_percentage
+
 
 def main():
     st.title("Sugarcane Calculator / गन्ना कैलकुलेटर")
@@ -44,23 +46,25 @@ def main():
     if language == "English":
         st.header("Enter Details")
 
-        sugarcane_quantity = st.number_input("Enter Sugarcane Quantity (in tonnes)", min_value=0.0, step=0.01)
-        sugarcane_price = st.number_input("Enter Sugarcane Price (per tonne)", min_value=0.0, step=0.01)
-        tractor_rent = st.number_input("Enter Tractor Rent (₹)", min_value=0.0, step=0.01)
-        weighing_machine_rent = st.number_input("Enter Weighing Machine Rent (₹)", min_value=0.0, step=0.01)
-        labour_rent = st.number_input("Enter Labour Rent (₹)", min_value=0.0, step=0.01)
-        other_rent = st.number_input("Enter Other Rent (₹)", min_value=0.0, step=0.01)
+        # Number inputs with min_value and step parameters
+        sugarcane_quantity = st.number_input("Enter Sugarcane Quantity (in tonnes)", min_value=0.0, step=0.01, format='%f')
+        sugarcane_price = st.number_input("Enter Sugarcane Price (per tonne)", min_value=0.0, step=0.01, format='%f')
+        tractor_rent = st.number_input("Enter Tractor Rent (₹)", min_value=0.0, step=0.01, format='%f')
+        weighing_machine_rent = st.number_input("Enter Weighing Machine Rent (₹)", min_value=0.0, step=0.01, format='%f')
+        labour_rent = st.number_input("Enter Labour Rent (₹)", min_value=0.0, step=0.01, format='%f')
+        other_rent = st.number_input("Enter Other Rent (₹)", min_value=0.0, step=0.01, format='%f')
         calculate_button = "Calculate"
 
     elif language == "हिन्दी":
         st.header("विवरण दर्ज करें")
 
-        sugarcane_quantity = st.number_input("गन्ने की मात्रा दर्ज करें (टन में)", min_value=0.0, step=0.01)
-        sugarcane_price = st.number_input("गन्ने की कीमत दर्ज करें (प्रति टन)", min_value=0.0, step=0.01)
-        tractor_rent = st.number_input("ट्रैक्टर किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
-        weighing_machine_rent = st.number_input("तौल पंक्ति किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
-        labour_rent = st.number_input("श्रमिक किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
-        other_rent = st.number_input("अन्य किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
+        # Number inputs with min_value and step parameters
+        sugarcane_quantity = st.number_input("गन्ने की मात्रा दर्ज करें (टन में)", min_value=0.0, step=0.01, format='%f')
+        sugarcane_price = st.number_input("गन्ने की कीमत दर्ज करें (प्रति टन)", min_value=0.0, step=0.01, format='%f')
+        tractor_rent = st.number_input("ट्रैक्टर किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01, format='%f')
+        weighing_machine_rent = st.number_input("तौल पंक्ति किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01, format='%f')
+        labour_rent = st.number_input("श्रमिक किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01, format='%f')
+        other_rent = st.number_input("अन्य किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01, format='%f')
         calculate_button = "गणना करें"
 
     if st.button(calculate_button):
@@ -72,9 +76,6 @@ def main():
             st.success(f"लाभ: ₹ {profit:.2f}")
             st.success(f"लाभ प्रतिशत: {profit_percentage:.2f} %")
 
-        # Display image of happy farmers
-        image = Image.open("happy_farmers.jpg")
-        st.image(image, caption='Happy Farmers / खुशहाल किसान', use_column_width=True)
 
 if __name__ == "__main__":
     main()
