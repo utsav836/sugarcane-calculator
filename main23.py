@@ -66,12 +66,7 @@ def print_data(rows):
 def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
     # Calculate amounts based on provided formulas
     cane_amount = net_weight * cane_rate
-    amount1 = net_weight * rate1
-    amount2 = net_weight * rate2
-  
-
-   
-    final_amount = cane_amount - (amount2 - amount1)
+    final_amount = cane_amount - (net_weight * rate1  - net_weight * rate2)
     
     return final_amount
 
@@ -93,10 +88,10 @@ def main():
             st.header("Enter Details")
 
             # Input fields
-            net_weight = st.number_input("Enter Net Weight (in quintals)", min_value=0.0, step=0.01)
-            cane_rate = st.number_input("Enter Cane Rate", min_value=0.0, step=0.01)
-            rate1 = st.number_input("Enter Rate 1", min_value=0.0, step=0.01)
-            rate2 = st.number_input("Enter Rate 2", min_value=0.0, step=0.01)
+            net_weight = st.number_input("Enter Net Weight (in quintals)", min_value=0.0, step=0)
+            cane_rate = st.number_input("Enter Cane Rate", min_value=0.0, step=0)
+            rate1 = st.number_input("Enter Rate 1", min_value=0.0, step=0)
+            rate2 = st.number_input("Enter Rate 2", min_value=0.0, step=0)
            
 
             calculate_button = st.button("Calculate")
