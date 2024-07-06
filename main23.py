@@ -69,9 +69,9 @@ def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
     amount1 = net_weight * rate1
     amount2 = net_weight * rate2
   
-    amount = amount2 - amount1
+
    
-    final_amount = cane_amount - amount
+    final_amount = cane_amount - (amount2 - amount1)
     
     return final_amount
 
