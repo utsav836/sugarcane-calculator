@@ -65,10 +65,11 @@ def print_data(rows):
 # Function to calculate final amount
 def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
     # Calculate amounts based on provided formulas
+    cane_amount = net_weight * cane_rate
     amount1 = net_weight * rate1
     amount2 = net_weight * rate2
-    cane_amount = net_weight * cane_rate
-    amount = amount1 - amount2
+  
+    amount = amount2 - amount1
    
     final_amount = cane_amount - amount
     
