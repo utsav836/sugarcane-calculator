@@ -1,35 +1,47 @@
 import streamlit as st
-import numpy as np
 from PIL import Image
 
-# Function to calculate profit percentage
+def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
+    # Calculate amounts based on provided formulas
+    amount1 = net_weight * rate1
+    amount2 = net_weight * rate2
+    amount = amount1 - amount2
+    cane_amount = net_weight * cane_rate
+    final_amount = cane_amount - amount
+    
+    return final_amount
+
 def calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rent):
+    # Calculate total revenue and total expenses
+    total_revenue = sugarcane_quantity * sugarcane_price
     total_expenses = tractor_rent + weighing_machine_rent + labour_rent + other_rent
-    total_income = sugarcane_quantity * sugarcane_price
-    profit = total_income - total_expenses
-    profit_percentage = (profit / total_income) * 100 if total_income != 0 else 0
+    
+    # Calculate profit and profit percentage
+    profit = total_revenue - total_expenses
+    profit_percentage = (profit / total_revenue) * 100 if total_revenue != 0 else 0
+    
     return profit, profit_percentage
 
 def main():
-    st.sidebar.title("Language Selection")
-    language = st.sidebar.selectbox("Select Language / भाषा चुनें", ["English", "हिन्दी"])
+    st.title("Sugarcane Calculator / गन्ना कैलकुलेटर")
+    st.markdown(
+        """
+        <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Language Selection
+    language = st.selectbox("Select Language / भाषा चुनें", ["English", "हिन्दी"])
 
     if language == "English":
-        st.title("Sugarcane Calculator")
-        st.markdown(
-            """
-            <style>
-            .center {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
         st.header("Enter Details")
 
         sugarcane_quantity = st.number_input("Enter Sugarcane Quantity (in tonnes)", min_value=0.0, step=0.01)
@@ -41,21 +53,6 @@ def main():
         calculate_button = "Calculate"
 
     elif language == "हिन्दी":
-        st.title("गन्ना कैलकुलेटर")
-        st.markdown(
-            """
-            <style>
-            .center {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
         st.header("विवरण दर्ज करें")
 
         sugarcane_quantity = st.number_input("गन्ने की मात्रा दर्ज करें (टन में)", min_value=0.0, step=0.01)
