@@ -3,12 +3,12 @@ import sqlite3
 
 # Function to calculate sugarcane amounts
 def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
+    amount1 = net_weight * rate1
+    amount2 = net_weight * rate2
+    amount = amount1 - amount2
     cane_amount = net_weight * cane_rate
-    final_amount = (cane_amount - (net_weight * rate1) -  ( net_weight * rate1))
-    return cane_amount, final_amount
-   
-   
-   
+    final_amount = cane_amount - amount
+    return amount1, amount2, amount, cane_amount, final_amount
 
 # Function to create SQLite connection and store results
 def store_result(net_weight, rate1, rate2, cane_rate, amount1, amount2, amount, cane_amount, final_amount):
