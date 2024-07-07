@@ -5,8 +5,7 @@ import sqlite3
 def sugarcane_calculator(net_weight, rate1, rate2, cane_rate):
    
      final_amount = ((net_weight * cane_rate) - ( net_weight * rate1) - ( net_weight * rate2))
-   
-    return final_amount
+     return final_amount
 
 # Function to create SQLite connection and store results
 def store_result(net_weight, rate1, rate2, cane_rate, final_amount):
