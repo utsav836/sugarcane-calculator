@@ -38,8 +38,8 @@ def main():
 
     # Input fields
     net_weight = st.number_input("Net Weight of Sugarcane (in quintals)")
-    rate1 = st.number_input("Rate 1 ( in ₹)")
-    rate2 = st.number_input("Rate 2 ( in ₹)")
+    rate1 = st.number_input("Tractor Rent ( in ₹)")
+    rate2 = st.number_input("Labour Rent ( in ₹)")
     cane_rate = st.number_input("Cane Rate ( in ₹)")
 
     # Calculate final amount
