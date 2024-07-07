@@ -25,59 +25,56 @@ def store_result(net_weight, rate1, rate2, cane_rate, amount1, amount2, amount, 
 # Main function to run the Streamlit app
 def main():
     # Define text elements for both languages
-    languages = {
-        'english': {
-            'title': "Sugarcane Calculator for Farmers",
-            'subheader': "Sugarcane Calculator for Farmers",
-            'prompt': "Please enter the necessary values (expected units: quintals and rupees):",
-            'labels': {
-                'net_weight': "Net Weight of Sugarcane (in quintals)",
-                'rate1': "Tractor Rent ( in ₹)",
-                'rate2': "Labour Rent ( in ₹)",
-                'cane_rate': "Cane Rate ( in ₹)"
-            },
-            'calculate_button': "Calculate",
-            'print_button': "Print",
-            'result_stored': "Result stored in database."
+    english_text = {
+        'title': "Sugarcane Calculator for Farmers",
+        'subheader': "Sugarcane Calculator for Farmers",
+        'prompt': "Please enter the necessary values (expected units: quintals and rupees):",
+        'labels': {
+            'net_weight': "Net Weight of Sugarcane (in quintals)",
+            'rate1': "Tractor Rent ( in ₹)",
+            'rate2': "Labour Rent ( in ₹)",
+            'cane_rate': "Cane Rate ( in ₹)"
         },
-        'hindi': {
-            'title': "गन्ना कैलकुलेटर किसानों के लिए",
-            'subheader': "गन्ना कैलकुलेटर किसानों के लिए",
-            'prompt': "कृपया आवश्यक आंकड़े दर्ज करें (एक्सेप्टेड यूनिट्स क्विंटल और रुपये):",
-            'labels': {
-                'net_weight': "गन्ने का नेट वजन (क्विंटल में)",
-                'rate1': "ट्रैक्टर किराया (₹ में)",
-                'rate2': "श्रमिक किराया (₹ में)",
-                'cane_rate': "गन्ने की दर (₹ में)"
-            },
-            'calculate_button': "गणना करें",
-            'print_button': "प्रिंट करें",
-            'result_stored': "परिणाम डेटाबेस में सहेजा गया।"
-        }
+        'calculate_button': "Calculate",
+        'print_button': "Print",
+        'result_stored': "Result stored in database."
     }
 
-    st.title(languages['english']['title'])  # Default to English title
+    hindi_text = {
+        'title': "गन्ना कैलकुलेटर किसानों के लिए",
+        'subheader': "गन्ना कैलकुलेटर किसानों के लिए",
+        'prompt': "कृपया आवश्यक आंकड़े दर्ज करें (एक्सेप्टेड यूनिट्स क्विंटल और रुपये):",
+        'labels': {
+            'net_weight': "गन्ने का नेट वजन (क्विंटल में)",
+            'rate1': "ट्रैक्टर किराया (₹ में)",
+            'rate2': "श्रमिक किराया (₹ में)",
+            'cane_rate': "गन्ने की दर (₹ में)"
+        },
+        'calculate_button': "गणना करें",
+        'print_button': "प्रिंट करें",
+        'result_stored': "परिणाम डेटाबेस में सहेजा गया।"
+    }
 
     # Language selection
     language = st.selectbox("Select Language / भाषा चुनें", ["English", "Hindi"])
 
-    if language == "Hindi":
-        st.title(languages['hindi']['title'])
-        st.subheader(languages['hindi']['subheader'])
-        st.write(languages['hindi']['prompt'])
+    if language == "English":
+        text = english_text
     else:
-        st.title(languages['english']['title'])
-        st.subheader(languages['english']['subheader'])
-        st.write(languages['english']['prompt'])
+        text = hindi_text
+
+    st.title(text['title'])
+    st.subheader(text['subheader'])
+    st.write(text['prompt'])
 
     # Input fields
-    net_weight = st.number_input(languages[language]['labels']['net_weight'])
-    rate1 = st.number_input(languages[language]['labels']['rate1'])
-    rate2 = st.number_input(languages[language]['labels']['rate2'])
-    cane_rate = st.number_input(languages[language]['labels']['cane_rate'])
+    net_weight = st.number_input(text['labels']['net_weight'])
+    rate1 = st.number_input(text['labels']['rate1'])
+    rate2 = st.number_input(text['labels']['rate2'])
+    cane_rate = st.number_input(text['labels']['cane_rate'])
 
     # Calculate final amount
-    if st.button(languages[language]['calculate_button']):
+    if st.button(text['calculate_button']):
         amount1, amount2, amount, cane_amount, final_amount = sugarcane_calculator(net_weight, rate1, rate2, cane_rate)
         st.write(f"Amount 1: {amount1:.2f} ₹")
         st.write(f"Amount 2: {amount2:.2f} ₹")
@@ -87,10 +84,10 @@ def main():
 
         # Store results in SQLite database
         store_result(net_weight, rate1, rate2, cane_rate, amount1, amount2, amount, cane_amount, final_amount)
-        st.write(languages[language]['result_stored'])
+        st.write(text['result_stored'])
 
     # Print option (placeholder)
-    if st.button(languages[language]['print_button']):
+    if st.button(text['print_button']):
         st.write("Printing functionality would go here.")
 
 if __name__ == "__main__":
