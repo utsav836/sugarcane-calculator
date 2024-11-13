@@ -3,8 +3,8 @@ import numpy as np
 from PIL import Image
 
 # Function to calculate profit percentage
-def calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rent):
-    total_expenses = tractor_rent + weighing_machine_rent + labour_rent + other_rent
+def calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rents):
+    total_expenses = tractor_rent + weighing_machine_rent + labour_rent + sum(other_rents)
     total_income = sugarcane_quantity * sugarcane_price
     profit = total_income - total_expenses
     profit_percentage = (profit / total_income) * 100 if total_income != 0 else 0
@@ -37,7 +37,14 @@ def main():
         tractor_rent = st.number_input("Enter Tractor Rent (₹)", min_value=0.0, step=0.01)
         weighing_machine_rent = st.number_input("Enter Weighing Machine Rent (₹)", min_value=0.0, step=0.01)
         labour_rent = st.number_input("Enter Labour Rent (₹)", min_value=0.0, step=0.01)
-        other_rent = st.number_input("Enter Other Rent (₹)", min_value=0.0, step=0.01)
+
+        # Handle Other Rent input as a list
+        other_rent_count = st.number_input("How many other rents do you have?", min_value=0, step=1)
+        other_rents = []
+        for i in range(int(other_rent_count)):
+            rent = st.number_input(f"Enter Other Rent {i + 1} (₹)", min_value=0.0, step=0.01)
+            other_rents.append(rent)
+
         calculate_button = "Calculate"
 
     elif language == "हिन्दी":
@@ -63,11 +70,18 @@ def main():
         tractor_rent = st.number_input("ट्रैक्टर किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
         weighing_machine_rent = st.number_input("तौल पंक्ति किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
         labour_rent = st.number_input("श्रमिक किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
-        other_rent = st.number_input("अन्य किराया दर्ज करें (₹ में)", min_value=0.0, step=0.01)
+
+        # Handle Other Rent input as a list
+        other_rent_count = st.number_input("कितने अन्य किराए हैं?", min_value=0, step=1)
+        other_rents = []
+        for i in range(int(other_rent_count)):
+            rent = st.number_input(f"अन्य किराया {i + 1} (₹ में)", min_value=0.0, step=0.01)
+            other_rents.append(rent)
+
         calculate_button = "गणना करें"
 
     if st.button(calculate_button):
-        profit, profit_percentage = calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rent)
+        profit, profit_percentage = calculate_profit(sugarcane_quantity, sugarcane_price, tractor_rent, weighing_machine_rent, labour_rent, other_rents)
         if language == "English":
             st.success(f"Profit: ₹ {profit:.2f}")
             st.success(f"Profit Percentage: {profit_percentage:.2f} %")
