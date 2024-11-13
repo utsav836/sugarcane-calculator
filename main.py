@@ -1,4 +1,5 @@
 import streamlit as st
+import numpy as np
 from PIL import Image
 
 # Function to calculate profit percentage
@@ -75,11 +76,8 @@ def main():
             st.success(f"लाभ प्रतिशत: {profit_percentage:.2f} %")
 
         # Display image of happy farmers
-        try:
-            image = Image.open("happy_farmers.jpg")
-            st.image(image, caption='Happy Farmers / खुशहाल किसान', use_column_width=True)
-        except Exception as e:
-            st.error("Image not found: happy_farmers.jpg")
+        image = Image.open("happy_farmers.jpg")
+        st.image(image, caption='Happy Farmers / खुशहाल किसान', use_column_width=True)
 
 if __name__ == "__main__":
     main()
